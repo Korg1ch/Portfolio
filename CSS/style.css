@@ -597,7 +597,7 @@
 .rectangle-97 {
   border-radius: 15px;
   border-style: solid;
-  border-color: var (--white, #d2d2d2);
+  border-color: var(--white, #d2d2d2);
   border-width: 1px;
   width: 108px;
   height: 48px;
@@ -608,7 +608,7 @@
 .web4 {
   color: var(--white, #d2d2d2);
   text-align: center;
-  font-family: var (--p-font-family, "JetBrainsMono-Regular", sans-serif);
+  font-family: var(--p-font-family, "JetBrainsMono-Regular", sans-serif);
   font-size: var(--p-font-size, 24px);
   line-height: var(--p-line-height, 120%);
   font-weight: var(--p-font-weight, 400);
@@ -690,7 +690,7 @@
   text-align: center;
   font-family: var(--p-font-family, "JetBrainsMono-Regular", sans-serif);
   font-size: var(--p-font-size, 24px);
-  line-height: var(--p-line-height, 120%);
+  line-height: var (--p-line-height, 120%);
   font-weight: var(--p-font-weight, 400);
   position: absolute;
   left: calc(50% - -420px);
@@ -728,7 +728,7 @@
 .java-script {
   color: var(--white, #d2d2d2);
   text-align: center;
-  font-family: var(--p-font-family, "JetBrainsMono-Regular", sans-serif);
+  font-family: var (--p-font-family, "JetBrainsMono-Regular", sans-serif);
   font-size: var(--p-font-size, 24px);
   line-height: var(--p-line-height, 120%);
   font-weight: var(--p-font-weight, 400);
@@ -933,7 +933,7 @@
 .android-studio2 {
   color: var(--white, #d2d2d2);
   text-align: center;
-  font-family: var (--p-font-family, "JetBrainsMono-Regular", sans-serif);
+  font-family: var(--p-font-family, "JetBrainsMono-Regular", sans-serif);
   font-size: var(--p-font-size, 24px);
   line-height: var(--p-line-height, 120%);
   font-weight: var(--p-font-weight, 400);
@@ -1012,7 +1012,7 @@
   font-family: var(--p-font-family, "JetBrainsMono-Regular", sans-serif);
   font-size: var(--p-font-size, 24px);
   line-height: var(--p-line-height, 120%);
-  font-weight: var(--p-font-weight, 400);
+  font-weight: var (--p-font-weight, 400);
   position: absolute;
   left: calc(50% - -107px);
   top: 1224px;
@@ -1129,7 +1129,7 @@
 .c4 {
   color: var(--white, #d2d2d2);
   text-align: center;
-  font-family: var(--p-font-family, "JetBrainsMono-Regular", sans-serif);
+  font-family: var (--p-font-family, "JetBrainsMono-Regular", sans-serif);
   font-size: var(--p-font-size, 24px);
   line-height: var(--p-line-height, 120%);
   font-weight: var(--p-font-weight, 400);
@@ -1560,7 +1560,7 @@
   position: static;
 }
 .back-g {
-  background: var(--all-page-background, #080808);
+  background: var(--all-page-background, #151515);
   border-radius: 16px;
   width: 432px;
   height: 96px;
@@ -1628,7 +1628,7 @@
   position: static;
 }
 .back {
-  background: var(--all-page-background, #080808);
+  background: var(--all-page-background, #151515);
   border-radius: 16px;
   width: 432px;
   height: 96px;
@@ -1691,7 +1691,7 @@
   position: static;
 }
 .back2 {
-  background: var(--all-page-background, #080808);
+  background: var(--all-page-background, #151515);
   border-radius: 16px;
   width: 432px;
   height: 96px;
@@ -1888,24 +1888,152 @@
   object-fit: cover;
   aspect-ratio: 384.73/116;
 }
-
-/* Hover эффекты для кнопок */
-.b-back:hover, 
-.b-back2:hover,
-.b-back4:hover,
-.rectangle-21:hover,
-.rectangle-212:hover,
-.rectangle-213:hover {
-  background: #ffffff;
-  transition: background-color 0.3s ease;
+#cursor {
+  animation: blink 1s step-end infinite;
+  font-weight: bold; 
 }
 
-/* Добавляю transition для плавного изменения при наведении */
+/* Добавление эффектов при наведении на кнопки */
+.rectangle-21:hover, 
+.rectangle-212:hover, 
+.b-back:hover, 
+.b-back2:hover, 
+.b-back4:hover {
+  background: #37ff00; /* Темнее зеленый при наведении */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* Hover эффект для кнопки с белым фоном */
+.rectangle-213:hover {
+  background: #272727; /* Чуть темнее при наведении */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* Hover эффект для discord кнопки */
+.b-back3:hover {
+  background: #373737; /* Чуть светлее при наведении */
+  transition: all 0.3s ease;
+}
+
+/* Добавляем базовые transition свойства для всех кнопок */
+.rectangle-21, 
+.rectangle-212, 
+.rectangle-213, 
 .b-back, 
-.b-back2,
+.b-back2, 
+.b-back3, 
+.b-back4 {
+  transition: all 0.3s ease;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0; 
+  }
+}
+
+/* Исправленные стили для hover эффектов */
+/* Добавление указателя курсора для всех кнопок */
+.rectangle-21, 
+.rectangle-212, 
+.rectangle-213, 
+.b-back, 
+.b-back2, 
+.b-back3, 
 .b-back4,
-.rectangle-21,
-.rectangle-212,
-.rectangle-213 {
-  transition: background-color 0.3s ease;
+a:hover {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Стили для кнопок при наведении */
+.rectangle-21:hover, 
+.rectangle-212:hover, 
+.b-back:hover, 
+.b-back2:hover, 
+.b-back4:hover,
+a:hover .rectangle-21,
+a:hover .rectangle-212,
+a:hover .b-back,
+a:hover .b-back2,
+a:hover .b-back4 {
+  background: #15a312;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Специальный стиль для кнопки Discord */
+.buttonD:hover .b-back4,
+.buttonD:hover {
+  cursor: pointer;
+  background: #15a312;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover эффект для "You Here" кнопки */
+.rectangle-213:hover {
+  background: #272727;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover эффект для Discord ID кнопки */
+.b-back3:hover {
+  background: #373737;
+  cursor: pointer;
+}
+
+/* Стили для текста внутри кнопок при наведении */
+a:hover .open-in-github,
+a:hover .open-in-new-grounds,
+a:hover .open,
+a:hover .open2,
+.buttonD:hover .open3 {
+}
+
+/* Стили для всплывающей подсказки при наведении на Discord кнопку */
+.discord-tooltip {
+  position: absolute;
+  background-color: #272727;
+  color: #d2d2d2;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: var(--p-font-family, "JetBrainsMono-Regular", sans-serif);
+  font-size: 16px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 100;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 60px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Треугольник внизу подсказки */
+.discord-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -8px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: #272727 transparent transparent transparent;
+}
+
+/* Показываем подсказку при наведении */
+.buttonD:hover .discord-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Добавим стиль для подсветки успешного копирования */
+.copy-success {
+  background-color: #1ab717 !important;
+  color: #fff;
 }

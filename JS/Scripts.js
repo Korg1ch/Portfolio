@@ -1,55 +1,108 @@
-// Добавляем обработчик события после загрузки страницы
-document.addEventListener('DOMContentLoaded', function() {
-    // Находим кнопку Discord и элемент с именем
-    const discordButton = document.querySelector('.buttonD');
-    const discordName = document.querySelector('.name');
+// Code for cursor blinking and typing effect
+function typewriterEffect() {
+    const phrases = ["developer", "designer", "engineer"];
+    const baseText = "> Hello, World! I'm *Korg!ch, ";
+    const textElement = document.querySelector(".text2");
+    // const cursor = document.getElementById('cursor'); // No longer needed here
+    let phraseIndex = 0;
+    let letterIndex = 0;
+    let isDeleting = false;
+    let isWaiting = false;
     
-    // Изначально скрываем элемент name
-    if (discordName) {
-        discordName.style.display = 'none';
+    // Function for printing and erasing text
+    function type() {
+      const currentPhrase = phrases[phraseIndex];
+  
+      // Wait before start erasing
+      if (isWaiting) {
+        setTimeout(() => {
+          isWaiting = false;
+          isDeleting = true;
+          type();
+        }, 2000); // 2 second pause before erasing
+        return;
+      }
+  
+      // Typing/erasing speed
+      const speed = isDeleting ? 100 : 150;
+  
+      if (isDeleting) {
+        // Erase text
+        letterIndex--;
+        if (letterIndex < 0) {
+          isDeleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length; // Move to next word
+        }
+      } else {
+        // Type text
+        letterIndex++;
+        if (letterIndex > currentPhrase.length) {
+          isWaiting = true;
+        }
+      }
+  
+      // Update text and ADD cursor element. CSS will make it blink.
+      textElement.innerHTML = baseText + currentPhrase.substring(0, letterIndex) + '<span id="cursor">|</span>';
+  
+      if (!isWaiting) {
+        setTimeout(type, speed);
+      } else {
+        type(); // Call immediately to start waiting
+      }
     }
-    
-    // Добавляем обработчик события клика для кнопки Discord
-    if (discordButton) {
-        discordButton.addEventListener('click', function() {
-            // Скрываем кнопку
-            this.style.display = 'none';
-            
-            // Показываем имя пользователя
-            if (discordName) {
-                discordName.style.display = 'block';
+  
+    // Start typing effect
+    type();
+  }
+  
+  // Launch the effect when page loads
+  document.addEventListener('DOMContentLoaded', () => {
+    typewriterEffect();
+  
+    // If there is a discord element for copying
+    const discordOpenButton = document.querySelector('.buttonD');
+    if (discordOpenButton) {
+      discordOpenButton.addEventListener('click', () => {
+        navigator.clipboard.writeText('korg1ch')
+          .then(() => {
+            const discordText = document.getElementById('discord-open-text');
+            const discordBack = document.getElementById('discord-open-back');
+            const tooltip = document.querySelector('.discord-tooltip');
+  
+            if (discordText) discordText.innerText = 'Copied!';
+            if (discordBack) discordBack.style.backgroundColor = '#4caf50';
+            if (tooltip) {
+              tooltip.textContent = 'Copied!';
+              tooltip.classList.add('copy-success');
             }
-            
-            // Копируем имя пользователя в буфер обмена
-            const username = document.querySelector('.korg-1-ch')?.textContent || '';
-            if (username) {
-                navigator.clipboard.writeText(username)
-                    .then(() => {
-                        console.log('Имя пользователя скопировано в буфер обмена');
-                    })
-                    .catch(err => {
-                        console.error('Не удалось скопировать имя: ', err);
-                    });
-            }
-        });
+  
+            setTimeout(() => {
+              if (discordText) discordText.innerText = 'Open';
+              if (discordBack) discordBack.style.backgroundColor = '';
+              if (tooltip) {
+                tooltip.textContent = 'Click to copy ID';
+                tooltip.classList.remove('copy-success');
+              }
+            }, 2000);
+          })
+          .catch(err => {
+            console.error('Failed to copy:', err);
+          });
+      });
     }
-    
-    // Добавляем ручные обработчики hover для кнопок (резервный вариант)
-    const allButtons = document.querySelectorAll('.b-back, .b-back2, .b-back4, .rectangle-21, .rectangle-212, .rectangle-213');
+
+    // Add handlers for all buttons and links
+    const allButtons = document.querySelectorAll('.rectangle-21, .rectangle-212, .rectangle-213, .b-back, .b-back2, .b-back3, .b-back4');
     
     allButtons.forEach(button => {
-        const originalColor = getComputedStyle(button).backgroundColor;
-        
-        button.addEventListener('mouseenter', function() {
-            console.log('Hover on button', this.className);
-            this.style.backgroundColor = '#89D788';
-        });
-        
-        button.addEventListener('mouseleave', function() {
-            this.style.backgroundColor = originalColor;
-        });
+      button.addEventListener('mouseenter', () => {
+        // Add class to activate effect
+        button.classList.add('hover-active');
+      });
+      
+      button.addEventListener('mouseleave', () => {
+        // Remove class when mouse leaves
+        button.classList.remove('hover-active');
+      });
     });
-    
-    // Проверка, что стили применились
-    console.log('Script loaded, buttons found:', allButtons.length);
-});
+  });
