@@ -690,7 +690,7 @@
   text-align: center;
   font-family: var(--p-font-family, "JetBrainsMono-Regular", sans-serif);
   font-size: var(--p-font-size, 24px);
-  line-height: var (--p-line-height, 120%);
+  line-height: var(--p-line-height, 120%);
   font-weight: var(--p-font-weight, 400);
   position: absolute;
   left: calc(50% - -420px);
@@ -728,7 +728,7 @@
 .java-script {
   color: var(--white, #d2d2d2);
   text-align: center;
-  font-family: var (--p-font-family, "JetBrainsMono-Regular", sans-serif);
+  font-family: var(--p-font-family, "JetBrainsMono-Regular", sans-serif);
   font-size: var(--p-font-size, 24px);
   line-height: var(--p-line-height, 120%);
   font-weight: var(--p-font-weight, 400);
@@ -1012,7 +1012,7 @@
   font-family: var(--p-font-family, "JetBrainsMono-Regular", sans-serif);
   font-size: var(--p-font-size, 24px);
   line-height: var(--p-line-height, 120%);
-  font-weight: var (--p-font-weight, 400);
+  font-weight: var(--p-font-weight, 400);
   position: absolute;
   left: calc(50% - -107px);
   top: 1224px;
@@ -1129,7 +1129,7 @@
 .c4 {
   color: var(--white, #d2d2d2);
   text-align: center;
-  font-family: var (--p-font-family, "JetBrainsMono-Regular", sans-serif);
+  font-family: var(--p-font-family, "JetBrainsMono-Regular", sans-serif);
   font-size: var(--p-font-size, 24px);
   line-height: var(--p-line-height, 120%);
   font-weight: var(--p-font-weight, 400);
@@ -1641,7 +1641,7 @@
   text-align: left;
   font-family: var(--h4-font-family, "JetBrainsMono-Medium", sans-serif);
   font-size: var(--h4-font-size, 32px);
-  font-weight: var (--h4-font-weight, 500);
+  font-weight: var(--h4-font-weight, 500);
   position: absolute;
   left: calc(50% - -432px);
   top: 768px;
@@ -1832,7 +1832,7 @@
   text-align: left;
   font-family: var(--h2-font-family, "JetBrainsMono-SemiBold", sans-serif);
   font-size: var(--h2-font-size, 40px);
-  font-weight: var (--h2-font-weight, 600);
+  font-weight: var(--h2-font-weight, 600);
   position: absolute;
   left: calc(50% - 743.11px);
   top: 504px;
