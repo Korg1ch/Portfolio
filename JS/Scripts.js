@@ -106,3 +106,28 @@ function typewriterEffect() {
       });
     });
   });
+
+// Cursor animation already handled by CSS animation
+
+// Discord ID copy functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const discordButton = document.querySelector('.buttonD');
+  const discordOpenText = document.getElementById('discord-open-text');
+  const discordOpenBack = document.getElementById('discord-open-back');
+  
+  if (discordButton) {
+    discordButton.addEventListener('click', function() {
+      const discordId = 'korg1ch';
+      navigator.clipboard.writeText(discordId).then(() => {
+        discordOpenText.textContent = 'Copied!';
+        
+        // Return to original state after 2 seconds
+        setTimeout(() => {
+          discordOpenText.textContent = 'Open';
+        }, 2000);
+      }).catch(err => {
+        console.error('Could not copy Discord ID: ', err);
+      });
+    });
+  }
+});
