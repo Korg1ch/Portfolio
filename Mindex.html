@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=no">
     <link rel="stylesheet" href="./CSS/Mvars.css">
     <link rel="stylesheet" href="./CSS/Mstyle.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,6 +32,47 @@
       
       // Also run check on window resize
       window.addEventListener('resize', checkScreenSize);
+    </script>
+    
+    <!-- Force page scale to 0.5 -->
+    <script>
+      // Устанавливаем масштаб 0.5 при загрузке страницы
+      function setPageScale() {
+        // Применяем масштабирование без блокирования скролла
+        document.documentElement.style.transform = 'scale(0.5)';
+        document.documentElement.style.transformOrigin = '0 0';
+        
+        // Устанавливаем высоту body в 200% для правильного масштабирования,
+        // но разрешаем прокрутку
+        document.body.style.width = '200vw';
+        document.body.style.height = 'auto';  // Изменено на auto для разрешения скролла
+        document.body.style.overflow = 'visible'; // Разрешаем прокрутку
+        
+        // Устанавливаем минимальную высоту для .mobile, чтобы футер был виден
+        const mobileElement = document.querySelector('.mobile');
+        mobileElement.style.width = (window.innerWidth * 2) + 'px';
+        
+        // Устанавливаем правильное поведение скролла для страницы
+        document.documentElement.style.overflow = 'auto';
+        document.documentElement.style.height = 'auto';
+      }
+      
+      // Вызываем при полной загрузке страницы
+      window.addEventListener('load', setPageScale);
+      
+      // Предотвращаем только масштабирование пальцами, но разрешаем прокрутку
+      document.addEventListener('touchmove', function(event) {
+        if (event.scale !== 1) { 
+          event.preventDefault();
+        }
+      }, { passive: false });
+      
+      // Фиксируем масштаб при скролле
+      window.addEventListener('scroll', function() {
+        if (document.documentElement.style.transform !== 'scale(0.5)') {
+          document.documentElement.style.transform = 'scale(0.5)';
+        }
+      });
     </script>
   </head>
 <body>

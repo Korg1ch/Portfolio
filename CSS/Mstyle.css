@@ -12,6 +12,9 @@ menu, ol, ul {
       margin: 0;
       padding: 0;
 }
+body {
+  background-color:var(--black, #020202);
+}
 
 .mobile,
 .mobile * {
@@ -282,7 +285,7 @@ menu, ol, ul {
 .vape-calculator2 {
   color: var(--white, #d2d2d2);
   text-align: left;
-  font-family: var (--h4-font-family, "JetBrainsMono-Medium", sans-serif);
+  font-family: var(--h4-font-family, "JetBrainsMono-Medium", sans-serif);
   font-size: var(--h4-font-size, 2rem);
   font-weight: var(--h4-font-weight, 500);
   position: absolute;
@@ -362,7 +365,7 @@ menu, ol, ul {
   top: 202.5rem;
 }
 .dart2 {
-  color: var (--white, #d2d2d2);
+  color: var(--white, #d2d2d2);
   text-align: center;
   font-family: var(--p-font-family, "JetBrainsMono-Regular", sans-serif);
   font-size: var(--p-font-size, 1.5rem);
