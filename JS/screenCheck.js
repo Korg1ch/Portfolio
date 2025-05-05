@@ -1,30 +1,37 @@
 /**
  * Screen size check for mobile/desktop redirection
- * Checks the actual device screen width and redirects to desktop version if needed
+ * Uses matchMedia for reliable detection based on viewport width.
+ * Redirects only if the current page version doesn't match the screen size.
  */
 
-// Check if the current device's screen is larger than the mobile threshold
-function checkScreenSize() {
-  // Use the physical screen width to get more accurate results
-  const realScreenWidth = window.screen.width;
-  
-  // Debug information
-  console.log("Screen width detected: " + realScreenWidth + "px");
-  
-  // Redirect to desktop version if screen is too large (over 1600px)
-  if (realScreenWidth > 1600) {
-    console.log("Large screen detected, redirecting to desktop version");
+// Define the media query for desktop size
+const desktopMediaQuery = window.matchMedia('(min-width: 1601px)');
+
+function checkScreenSizeAndRedirect() {
+  const isDesktop = desktopMediaQuery.matches;
+  // Extract the filename from the current URL
+  const currentFilename = window.location.pathname.split('/').pop() || 'Mindex.html'; // Default to mobile if path is '/'
+
+  console.log(`Screen check: isDesktop=${isDesktop}, currentFile=${currentFilename}`);
+
+  // --- Redirection Logic ---
+  // If screen is wide AND we are currently on the mobile page (Mindex.html)
+  if (isDesktop && currentFilename === 'Mindex.html') {
+    console.log("Screen is wide, on mobile page. Redirecting to desktop (index.html)...");
     window.location.href = './index.html';
+  }
+  // If screen is narrow AND we are currently on the desktop page (index.html)
+  else if (!isDesktop && currentFilename === 'index.html') {
+    console.log("Screen is narrow, on desktop page. Redirecting to mobile (Mindex.html)...");
+    window.location.href = './Mindex.html';
   } else {
-    console.log("Mobile view is appropriate for this screen size");
+    console.log("Already on the correct page version for this screen size.");
   }
 }
 
-// Run the check when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', checkScreenSize);
+// Run the check once when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', checkScreenSizeAndRedirect);
 
-// Also check when device orientation changes
-window.addEventListener('orientationchange', function() {
-  // Add slight delay to ensure screen dimensions are updated
-  setTimeout(checkScreenSize, 100);
-});
+// Add a listener to the media query to re-check when the viewport size crosses the threshold
+// This is more efficient than listening to every resize event.
+desktopMediaQuery.addEventListener('change', checkScreenSizeAndRedirect);
