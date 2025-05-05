@@ -1,50 +1,77 @@
 /**
- * Mobile page scaling script
- * Scales the page to 0.5 size for better visibility on mobile devices
- * while preserving functionality and allowing scrolling
+ * Mobile scaling script
+ * Applies a 0.75 scale factor to the page for better mobile viewing experience
+ * while maintaining scrollability and proper layout
  */
 
-// Set the scale factor for the entire page
-const SCALE_FACTOR = 0.7;
+// Set the scale factor to 0.75 as requested
+const SCALE_FACTOR = 0.75;
 
 /**
- * Applies scaling to the page content without affecting scrolling
- * Uses a simplified approach that applies transform directly to the body
+ * Applies scaling transformation to the page
+ * Uses transform to scale content without affecting the underlying structure
  */
 function setPageScale() {
-  // Apply scaling transformation to the body element
+  // Apply transform with origin at top-left corner
   document.body.style.transformOrigin = '0 0';
   document.body.style.transform = `scale(${SCALE_FACTOR})`;
   
-  // Allow vertical scrolling but prevent horizontal scrolling
-  document.body.style.overflow = 'hidden auto';
-  document.documentElement.style.overflow = 'hidden';
+  // Set proper dimensions to accommodate the scaled content
+  document.body.style.width = `${100/SCALE_FACTOR}%`;
+  document.body.style.minHeight = `${100/SCALE_FACTOR}%`;
   
-  // Compensate for the scaling by increasing dimensions
-  // This ensures the scaled content fills the viewport properly
-  document.body.style.height = (100/SCALE_FACTOR) + 'vh';
-  document.body.style.width = (100/SCALE_FACTOR) + 'vw';
+  // Enable vertical scrolling but prevent horizontal overflow
+  document.body.style.overflowX = 'hidden';
+  document.body.style.overflowY = 'auto';
   
-  // Remove margins and padding to prevent unwanted space
+  // Remove default margins to prevent unwanted spacing
   document.body.style.margin = '0';
   document.body.style.padding = '0';
   
-  console.log('Mobile scaling applied at factor:', SCALE_FACTOR);
+  // Fix for mobile browsers - ensure proper touch behavior
+  document.body.style.touchAction = 'pan-y';
+  
+  console.log(`Page scaled to ${SCALE_FACTOR} factor`);
+  
+  // Ensure footer is properly visible after scaling
+  fixFooterPosition();
 }
 
-// Apply scaling when DOM content is fully loaded
+/**
+ * Helper function to ensure footer is properly positioned
+ * after the page has been scaled
+ */
+function fixFooterPosition() {
+  // Find the footer element
+  const footerElement = document.querySelector('.footer-the-end');
+  if (!footerElement) return;
+  
+  // Calculate footer position after scaling and adjust if needed
+  const footerPosition = footerElement.getBoundingClientRect().bottom;
+  const desiredHeight = (footerPosition * SCALE_FACTOR) + 100; // Add some padding
+  
+  // Set minimum document height to ensure footer is visible
+  document.documentElement.style.minHeight = desiredHeight + 'px';
+}
+
+// Apply scaling when DOM is loaded
 document.addEventListener('DOMContentLoaded', setPageScale);
 
-/**
- * Prevent multi-touch zoom gestures but allow scrolling
- * This ensures the page maintains its set scale
- */
-document.addEventListener('touchmove', function(e) {
-  // If this is a multi-touch event (pinch to zoom)
-  if (e.touches.length > 1) {
-    e.preventDefault();
+// Reapply when window is resized (orientation change, etc.)
+window.addEventListener('resize', function() {
+  // Use a debounce technique to prevent excessive recalculation
+  clearTimeout(window.resizeTimer);
+  window.resizeTimer = setTimeout(setPageScale, 250);
+});
+
+// Prevent pinch-zoom gestures which would interfere with our scaling
+document.addEventListener('touchmove', function(event) {
+  if (event.touches.length > 1) {
+    event.preventDefault();
   }
 }, { passive: false });
 
-// Re-apply scaling after any window resize event
-window.addEventListener('resize', setPageScale);
+// Fix for iOS Safari and some Android browsers
+document.addEventListener('gesturestart', function(event) {
+  event.preventDefault();
+}, { passive: false });
