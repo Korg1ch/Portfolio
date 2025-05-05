@@ -1368,133 +1368,6 @@
   top: 1272px;
   overflow: hidden;
 }
-.vector3 {
-  width: 50.04%;
-  height: 28.14%;
-  position: absolute;
-  right: 29.63%;
-  left: 20.33%;
-  bottom: 53.12%;
-  top: 18.74%;
-  overflow: visible;
-}
-.vector4 {
-  width: 50.06%;
-  height: 27.98%;
-  position: absolute;
-  right: 29.54%;
-  left: 20.4%;
-  bottom: 18.89%;
-  top: 53.13%;
-  overflow: visible;
-}
-.vector5 {
-  width: 24.68%;
-  height: 56.05%;
-  position: absolute;
-  right: 16.05%;
-  left: 59.26%;
-  bottom: 22.01%;
-  top: 21.93%;
-  overflow: visible;
-}
-.vector6 {
-  opacity: 0.07;
-  width: 45.34%;
-  height: 25.48%;
-  position: absolute;
-  right: 31.8%;
-  left: 22.86%;
-  bottom: 54.16%;
-  top: 20.36%;
-  overflow: visible;
-}
-.vector7 {
-  opacity: 0.05;
-  width: 45.34%;
-  height: 25.48%;
-  position: absolute;
-  right: 31.8%;
-  left: 22.86%;
-  bottom: 54.16%;
-  top: 20.36%;
-  overflow: visible;
-}
-.vector8 {
-  opacity: 0.07;
-  width: 45.34%;
-  height: 25.48%;
-  position: absolute;
-  right: 31.8%;
-  left: 22.86%;
-  bottom: 54.16%;
-  top: 20.36%;
-  overflow: visible;
-}
-.vector9 {
-  opacity: 0.07;
-  width: 22.39%;
-  height: 50.84%;
-  position: absolute;
-  right: 17.14%;
-  left: 60.48%;
-  bottom: 24.61%;
-  top: 24.54%;
-  overflow: visible;
-}
-.vector10 {
-  opacity: 0.07;
-  width: 45.34%;
-  height: 25.32%;
-  position: absolute;
-  right: 31.72%;
-  left: 22.94%;
-  bottom: 20.51%;
-  top: 54.17%;
-  overflow: visible;
-}
-.vector11 {
-  opacity: 0.05;
-  width: 22.39%;
-  height: 50.84%;
-  position: absolute;
-  right: 17.14%;
-  left: 60.48%;
-  bottom: 24.61%;
-  top: 24.54%;
-  overflow: visible;
-}
-.vector12 {
-  opacity: 0.07;
-  width: 22.39%;
-  height: 50.84%;
-  position: absolute;
-  right: 17.14%;
-  left: 60.48%;
-  bottom: 24.61%;
-  top: 24.54%;
-  overflow: visible;
-}
-.group {
-  width: 45.34%;
-  height: 25.32%;
-  position: absolute;
-  right: 31.72%;
-  left: 22.94%;
-  bottom: 20.51%;
-  top: 54.17%;
-  overflow: visible;
-}
-.vector13 {
-  width: 83.16%;
-  height: 83.33%;
-  position: absolute;
-  right: 10.42%;
-  left: 6.42%;
-  bottom: 8.33%;
-  top: 8.33%;
-  overflow: visible;
-}
 .android3 {
   width: 432px;
   height: 97px;
@@ -2036,4 +1909,141 @@ a:hover .open2,
 .copy-success {
   background-color: #1ab717 !important;
   color: #fff;
+}
+.vector13 {
+  width: 22px;
+  height: 24.1px;
+  position: absolute;
+  left: calc(50% - -578px);
+  top: 1139.95px;
+  overflow: visible;
+  aspect-ratio: 22/24.1;
+}
+
+.vector2 {
+  width: 50.04%;
+  height: 28.14%;
+  position: absolute;
+  right: 29.63%;
+  left: 20.33%;
+  bottom: 53.12%;
+  top: 18.74%;
+  overflow: visible;
+}
+.vector3 {
+  width: 50.06%;
+  height: 27.98%;
+  position: absolute;
+  right: 29.54%;
+  left: 20.4%;
+  bottom: 18.89%;
+  top: 53.13%;
+  overflow: visible;
+}
+.vector4 {
+  width: 24.68%;
+  height: 56.05%;
+  position: absolute;
+  right: 16.05%;
+  left: 59.26%;
+  bottom: 22.01%;
+  top: 21.93%;
+  overflow: visible;
+}
+.vector5 {
+  opacity: 0.07;
+  width: 45.34%;
+  height: 25.48%;
+  position: absolute;
+  right: 31.8%;
+  left: 22.86%;
+  bottom: 54.16%;
+  top: 20.36%;
+  overflow: visible;
+}
+.vector6 {
+  opacity: 0.05;
+  width: 45.34%;
+  height: 25.48%;
+  position: absolute;
+  right: 31.8%;
+  left: 22.86%;
+  bottom: 54.16%;
+  top: 20.36%;
+  overflow: visible;
+}
+.vector7 {
+  opacity: 0.07;
+  width: 45.34%;
+  height: 25.48%;
+  position: absolute;
+  right: 31.8%;
+  left: 22.86%;
+  bottom: 54.16%;
+  top: 20.36%;
+  overflow: visible;
+}
+.vector8 {
+  opacity: 0.07;
+  width: 22.39%;
+  height: 50.84%;
+  position: absolute;
+  right: 17.14%;
+  left: 60.48%;
+  bottom: 24.61%;
+  top: 24.54%;
+  overflow: visible;
+}
+.vector9 {
+  opacity: 0.07;
+  width: 45.34%;
+  height: 25.32%;
+  position: absolute;
+  right: 31.72%;
+  left: 22.94%;
+  bottom: 20.51%;
+  top: 54.17%;
+  overflow: visible;
+}
+.vector10 {
+  opacity: 0.05;
+  width: 22.39%;
+  height: 50.84%;
+  position: absolute;
+  right: 17.14%;
+  left: 60.48%;
+  bottom: 24.61%;
+  top: 24.54%;
+  overflow: visible;
+}
+.vector11 {
+  opacity: 0.07;
+  width: 22.39%;
+  height: 50.84%;
+  position: absolute;
+  right: 17.14%;
+  left: 60.48%;
+  bottom: 24.61%;
+  top: 24.54%;
+  overflow: visible;
+}
+.group {
+  width: 45.34%;
+  height: 25.32%;
+  position: absolute;
+  right: 31.72%;
+  left: 22.94%;
+  bottom: 20.51%;
+  top: 54.17%;
+  overflow: visible;
+}
+.vector12 {
+  width: 83.16%;
+  height: 83.33%;
+  position: absolute;
+  right: 10.42%;
+  left: 6.42%;
+  bottom: 8.33%;
+  top: 8.33%;
+  overflow: visible;
 }

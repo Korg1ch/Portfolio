@@ -1,10 +1,16 @@
-// Mobile/desktop version switching script
+// Скрипт переключения мобильной/десктопной версии
 function checkWindowWidth() {
-    // Using screen.width instead of window.innerWidth to ignore scaling
-    const windowWidth = screen.width;
+    // Используем несколько способов определения ширины для надежности
+    const screenWidth = screen.width;
+    const outerWidth = window.outerWidth;
+    const clientWidth = document.documentElement.clientWidth;
+    
+    // Выбираем наиболее подходящее значение
+    const windowWidth = Math.min(screenWidth, outerWidth, clientWidth);
+    
     const currentPage = window.location.pathname.split('/').pop();
     
-    // Adding a check to prevent redirect loops
+    // Добавляем проверку для предотвращения циклического перенаправления
     const isRedirecting = sessionStorage.getItem('redirecting');
     
     if (isRedirecting) {
@@ -12,8 +18,11 @@ function checkWindowWidth() {
         return;
     }
     
+    // Фиксируем в журнал для отладки
+    console.log("Определена ширина: " + windowWidth + ", текущая страница: " + currentPage);
+    
     if (windowWidth < 1600) {
-        if (currentPage !== 'Mindex.html') {
+        if (currentPage !== 'Mindex.html' && currentPage !== '') {
             sessionStorage.setItem('redirecting', 'true');
             window.location.href = 'Mindex.html';
         }
@@ -25,8 +34,11 @@ function checkWindowWidth() {
     }
 }
 
-// Reducing check frequency for better performance
-setInterval(checkWindowWidth, 500);
-
-// Delay before first check to ensure page is fully loaded
-setTimeout(checkWindowWidth, 300);
+// Запускаем после полной загрузки страницы
+window.addEventListener('load', function() {
+    // Первая проверка после небольшой задержки
+    setTimeout(checkWindowWidth, 100);
+    
+    // Периодическая проверка с меньшей частотой
+    setInterval(checkWindowWidth, 1000);
+});
