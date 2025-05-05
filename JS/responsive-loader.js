@@ -1,44 +1,41 @@
-// Скрипт переключения мобильной/десктопной версии
+// Mobile/desktop version switching script for hosting compatibility
 function checkWindowWidth() {
-    // Используем несколько способов определения ширины для надежности
-    const screenWidth = screen.width;
-    const outerWidth = window.outerWidth;
-    const clientWidth = document.documentElement.clientWidth;
-    
-    // Выбираем наиболее подходящее значение
-    const windowWidth = Math.min(screenWidth, outerWidth, clientWidth);
-    
-    const currentPage = window.location.pathname.split('/').pop();
-    
-    // Добавляем проверку для предотвращения циклического перенаправления
-    const isRedirecting = sessionStorage.getItem('redirecting');
-    
-    if (isRedirecting) {
-        sessionStorage.removeItem('redirecting');
-        return;
-    }
-    
-    // Фиксируем в журнал для отладки
-    console.log("Определена ширина: " + windowWidth + ", текущая страница: " + currentPage);
-    
-    if (windowWidth < 1600) {
-        if (currentPage !== 'Mindex.html' && currentPage !== '') {
-            sessionStorage.setItem('redirecting', 'true');
-            window.location.href = 'Mindex.html';
+    try {
+        // Simple width detection that works more consistently across hosting environments
+        const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        
+        // Get current URL and check which page we're on - more reliable for hosting
+        const currentUrl = window.location.href.toLowerCase();
+        const isMobilePage = currentUrl.indexOf('mindex.html') > -1;
+        const isMainPage = !isMobilePage && (currentUrl.indexOf('index.html') > -1 || currentUrl.endsWith('/') || currentUrl.endsWith('/portfolio'));
+        
+        console.log("Width: " + windowWidth + ", Mobile page: " + isMobilePage + ", Main page: " + isMainPage);
+        
+        // Simple redirect logic with no session storage dependency
+        if (windowWidth < 1600) {
+            if (!isMobilePage) {
+                console.log("Redirecting to mobile version");
+                window.location.replace('Mindex.html');
+            }
+        } else {
+            if (isMobilePage) {
+                console.log("Redirecting to desktop version");
+                window.location.replace('index.html');
+            }
         }
-    } else {
-        if (currentPage === 'Mindex.html') {
-            sessionStorage.setItem('redirecting', 'true');
-            window.location.href = 'index.html';
-        }
+    } catch (error) {
+        console.error("Redirection error:", error);
     }
 }
 
-// Запускаем после полной загрузки страницы
-window.addEventListener('load', function() {
-    // Первая проверка после небольшой задержки
-    setTimeout(checkWindowWidth, 100);
-    
-    // Периодическая проверка с меньшей частотой
-    setInterval(checkWindowWidth, 1000);
+// Run once when DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(checkWindowWidth, 300);
+});
+
+// Add window resize listener - more reliable than setInterval
+window.addEventListener('resize', function() {
+    // Using debounce to prevent frequent checks
+    clearTimeout(window.resizeTimer);
+    window.resizeTimer = setTimeout(checkWindowWidth, 250);
 });
