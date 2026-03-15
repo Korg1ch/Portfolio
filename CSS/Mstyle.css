@@ -16,12 +16,20 @@ body {
   background-color:var(--black, #020202);
 }
 
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 .mobile,
 .mobile * {
   box-sizing: border-box;
 }
 .mobile {
   background: var(--allback, #151515);
+  width: 720px;
+  margin: 0 auto;
   height: 342rem;
   position: relative;
   overflow: hidden;

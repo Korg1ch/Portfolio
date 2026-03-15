@@ -1,41 +1,78 @@
-// Mobile/desktop version switching script for hosting compatibility
-function checkWindowWidth() {
-    try {
-        // Simple width detection that works more consistently across hosting environments
-        const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-        
-        // Get current URL and check which page we're on - more reliable for hosting
-        const currentUrl = window.location.href.toLowerCase();
-        const isMobilePage = currentUrl.indexOf('mindex.html') > -1;
-        const isMainPage = !isMobilePage && (currentUrl.indexOf('index.html') > -1 || currentUrl.endsWith('/') || currentUrl.endsWith('/portfolio'));
-        
-        console.log("Width: " + windowWidth + ", Mobile page: " + isMobilePage + ", Main page: " + isMainPage);
-        
-        // Simple redirect logic with no session storage dependency
-        if (windowWidth < 1600) {
-            if (!isMobilePage) {
-                console.log("Redirecting to mobile version");
-                window.location.replace('Mindex.html');
-            }
-        } else {
-            if (isMobilePage) {
-                console.log("Redirecting to desktop version");
-                window.location.replace('index.html');
-            }
-        }
-    } catch (error) {
-        console.error("Redirection error:", error);
+const BREAKPOINTS = {
+    mobileMax: 1599,
+    desktopMin: 1600
+};
+
+const PAGE_CONFIG = {
+    desktop: {
+        selector: '.page-en',
+        width: 1920,
+        height: 2999
+    },
+    mobile: {
+        selector: '.mobile',
+        width: 720,
+        height: 5472
     }
+};
+
+function getWindowWidth() {
+    return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 }
 
-// Run once when DOM is fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(checkWindowWidth, 300);
+function getCurrentPageType() {
+    const path = window.location.pathname.toLowerCase();
+    return path.includes('mindex.html') ? 'mobile' : 'desktop';
+}
+
+function applyScale(pageType, windowWidth) {
+    const pageConfig = PAGE_CONFIG[pageType];
+    const pageRoot = document.querySelector(pageConfig.selector);
+
+    if (!pageRoot) {
+        return;
+    }
+
+    const scale = Math.min(1, windowWidth / pageConfig.width);
+    const scaledHeight = Math.round(pageConfig.height * scale);
+
+    pageRoot.style.zoom = String(scale);
+
+    document.documentElement.style.overflowX = 'hidden';
+    document.body.style.overflowX = 'hidden';
+    document.body.style.minHeight = `${scaledHeight}px`;
+}
+
+function redirectIfNeeded(pageType, windowWidth) {
+    if (pageType === 'desktop' && windowWidth <= BREAKPOINTS.mobileMax) {
+        window.location.replace('Mindex.html');
+        return true;
+    }
+
+    if (pageType === 'mobile' && windowWidth >= BREAKPOINTS.desktopMin) {
+        window.location.replace('index.html');
+        return true;
+    }
+
+    return false;
+}
+
+function handleResponsive() {
+    const windowWidth = getWindowWidth();
+    const pageType = getCurrentPageType();
+
+    if (redirectIfNeeded(pageType, windowWidth)) {
+        return;
+    }
+
+    applyScale(pageType, windowWidth);
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    handleResponsive();
 });
 
-// Add window resize listener - more reliable than setInterval
-window.addEventListener('resize', function() {
-    // Using debounce to prevent frequent checks
+window.addEventListener('resize', function () {
     clearTimeout(window.resizeTimer);
-    window.resizeTimer = setTimeout(checkWindowWidth, 250);
+    window.resizeTimer = setTimeout(handleResponsive, 120);
 });

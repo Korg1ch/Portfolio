@@ -9,6 +9,15 @@
 
   -webkit-font-smoothing: antialiased;
 }
+.page-en,
+html,
+body {
+  width: 100%;
+}
+html,
+body {
+  overflow-x: hidden;
+}
 .page-en * {
   box-sizing: border-box;
 }
@@ -17,6 +26,8 @@
   border-style: solid;
   border-color: var(--black, #020202);
   border-width: 1px;
+  width: 1920px;
+  margin: 0 auto;
   height: 2999px;
   position: relative;
 }
